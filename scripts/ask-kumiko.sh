@@ -42,5 +42,4 @@ exec codex exec \
   -C "$cheatbook_dir" \
   --add-dir "$source_dir" \
   --sandbox workspace-write \
-  --ask-for-approval never \
   "$prompt"
