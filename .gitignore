@@ -1,0 +1,13 @@
+.DS_Store
+
+# Personal, file-based working memory. The template remains versioned so a
+# fresh clone can create new handoffs without inheriting anyone's context.
+/sessions/
+/handoffs/**
+!/handoffs/
+!/handoffs/TEMPLATE.md
+
+# Generated visuals are local outputs, not repository assets.
+assets/generated/*.png
+assets/generated/*.jpg
+assets/generated/*.webp
