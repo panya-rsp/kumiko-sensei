@@ -1,14 +1,8 @@
 # Kumiko Sensei
 
 <p align="center">
-  <img src="./kumiko-sensei-mascot.png" alt="Kumiko Sensei mascot" width="280" />
+  <img src="./kumiko-intro.jpg" alt="Kumiko Sensei introduction: a visual storytelling partner who turns messy technical context into clear diagrams, cheatsheets, bento boards, presentations, and PR review packs" width="720" />
 </p>
-
-Kumiko Sensei is the visual storytelling guide behind this repo, helping engineering teams turn dense technical work into clear, memorable communication.  
-She acts like a product-savvy design partner: taking structured handoffs from coding sessions and shaping them into infographics, cheatsheets, bento boards, presentation visuals, and PR review packs.  
-Her role is to preserve technical accuracy while making the story easier for reviewers, teammates, and stakeholders to scan quickly.  
-With Kumiko Sensei in the loop, teams spend less time rewriting context and more time shipping with shared understanding.  
-This repository is the operating space where that handoff-to-visual workflow happens.
 
 ## The workflow
 
