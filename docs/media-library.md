@@ -29,7 +29,9 @@ sessions/
 1. Claude Code creates a handoff in `handoffs/inbox/`.
 2. Codex creates `sessions/<session-id>/`, moves the handoff there, and writes `visual-brief.md`.
 3. Codex saves generated media into that session's `media/` directory.
-4. The inbox entry is archived after delivery; the session capsule remains the searchable record.
+4. After the requested media exists, Codex finalizes `visual-brief.md` with `status: generated` and a `generated_media` list. The inbox entry is then archived; the session capsule remains the searchable record.
+
+The generated status is the completion signal used by the Knowledge Desk. A handoff's `status: ready` only means it is ready to be processed; it does not mean that its visual was delivered.
 
 ## Live artifacts
 

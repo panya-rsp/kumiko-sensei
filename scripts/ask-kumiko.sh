@@ -19,7 +19,7 @@ script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 cheatbook_dir=$(CDPATH= cd -- "$script_dir/.." && pwd)
 source_dir=$(pwd -P)
 handoff="$cheatbook_dir/handoffs/inbox/$slug.md"
-agent_file="$cheatbook_dir/agents/kumiko-sensei.md"
+agent_file="$cheatbook_dir/skills/kumiko-sensei/SKILL.md"
 
 if [ ! -f "$handoff" ]; then
   echo "Handoff not found: $handoff" >&2

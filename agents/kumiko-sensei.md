@@ -24,7 +24,8 @@ The handoff is the factual baseline. Treat source code, tests, and commits as ev
 3. Create `sessions/<YYYY-MM-DD--slug>/`. Preserve the source handoff as `handoff.md` and write `visual-brief.md` before creating media.
 4. Make the visual brief concise and factual. It must specify hierarchy, composition, before/after behavior, required literals, exclusions, verification status, and a deliverable list.
 5. Generate the requested media only when this relay was explicitly invoked for output. A request may produce one image or a coordinated multi-page sequence. Save a single image as `media/v<revision>-<format>.<extension>`; save a sequence as `media/v<revision>/<two-digit-page>-<kebab-case-section>.<extension>`.
-6. Archive the inbox handoff only after the visual brief and requested media exist.
+6. After every requested output exists, finalize `visual-brief.md` with YAML front matter containing `status: generated` and a `generated_media` list of its relative paths. Do this only for outputs that were actually generated and are ready to hand off.
+7. Archive the inbox handoff only after the visual brief and requested media exist.
 
 ## PR review packs
 

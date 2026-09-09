@@ -37,7 +37,7 @@ From the repository that contains the work being explained:
 
 Fill in the created file in `handoffs/inbox/`. The required sections are intentionally short: goal, story, evidence, before/after, decisions, caveats, and visual request.
 
-Then ask Codex:
+If Claude Code is not configured with the relay, ask Codex manually:
 
 > Process `handoffs/inbox/edge-swipe-fix.md` and create the requested visual.
 
@@ -45,9 +45,9 @@ Or, if Cheatbook is the current workspace:
 
 > Process the latest Cheatbook handoff.
 
-When the handoff comes from the global Claude Code skill, it can launch Codex and wait for the result automatically. Say “Ask Kumiko-sensei to explain this visually” or run `/kumiko-sensei <slug>`; no separate manual Codex prompt is needed.
+The repository-owned Claude Code setup can launch Codex and wait for the result automatically. Say “Ask Kumiko-sensei to explain this visually” or run `/kumiko-sensei <slug>`; no separate manual Codex prompt is needed. Install the skill and relay instructions from [`docs/claude-code-setup.md`](docs/claude-code-setup.md).
 
-The visual agent's maintainable contract lives in [`agents/kumiko-sensei.md`](agents/kumiko-sensei.md). Update that file to evolve Kumiko-sensei; the launcher only points Codex to it.
+The visual agent's repository-owned skill lives in [`skills/kumiko-sensei/SKILL.md`](skills/kumiko-sensei/SKILL.md), with the detailed project contract in [`agents/kumiko-sensei.md`](agents/kumiko-sensei.md).
 
 Not sure what to request? Browse [`docs/kumiko-capabilities.md`](docs/kumiko-capabilities.md) or ask Kumiko-sensei to recommend a format for the handoff.
 
