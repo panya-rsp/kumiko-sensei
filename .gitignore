@@ -11,3 +11,10 @@
 assets/generated/*.png
 assets/generated/*.jpg
 assets/generated/*.webp
+
+# Xcode build artifacts for the mac app.
+app/.build/
+app/.build-shots/
+app/*.profraw
+app/xcuserdata/
+app/**/xcuserdata/
