@@ -1,5 +1,5 @@
 import Testing
-@testable import KumikoKnowledgeDesk
+@testable import KumikoSensei
 
 struct SearchTests {
     let index = SearchIndex(items: LibraryScanner(root: Fixtures.previewLibrary).scan().items)

@@ -20,6 +20,6 @@ Do not generate the image yourself unless the user asks. The handoff is the dura
 
 For a PR review pack, set `visual_format: pr-review-pack` and fill in the PR review pack prompts. Once Kumiko-sensei returns the session output, Claude Code is responsible for reading `pr-review-pack.md`, making the generated image available to the live PR, and inserting the generated Markdown at the top of its description. Kumiko-sensei has no organization GitHub access and must never be asked to update the PR directly.
 
-## Kumiko Knowledge Desk (mac app)
+## Kumiko Sensei (mac app)
 
 The native macOS knowledge browser lives in `app/` at the repo root (Xcode project, sources, tests, `Tools/`). When asked to build or change it, read `sessions/2026-09-07--kumiko-knowledge-desk/visual-brief.md` in full before making implementation decisions. Keep the local Markdown/session library as the source of truth, and follow the brief's acceptance checks and explicit no-GitHub/no-hidden-model boundaries.

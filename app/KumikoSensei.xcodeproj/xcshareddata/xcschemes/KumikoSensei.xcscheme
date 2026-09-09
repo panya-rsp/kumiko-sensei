@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A10000000000000000000010"
                BuildableName = "Kumiko Sensei.app"
-               BlueprintName = "KumikoKnowledgeDesk"
-               ReferencedContainer = "container:KumikoKnowledgeDesk.xcodeproj">
+               BlueprintName = "KumikoSensei"
+               ReferencedContainer = "container:KumikoSensei.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,9 +35,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A10000000000000000000030"
-               BuildableName = "KumikoKnowledgeDeskTests.xctest"
-               BlueprintName = "KumikoKnowledgeDeskTests"
-               ReferencedContainer = "container:KumikoKnowledgeDesk.xcodeproj">
+               BuildableName = "KumikoSenseiTests.xctest"
+               BlueprintName = "KumikoSenseiTests"
+               ReferencedContainer = "container:KumikoSensei.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,9 +45,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A10000000000000000000050"
-               BuildableName = "KumikoKnowledgeDeskUITests.xctest"
-               BlueprintName = "KumikoKnowledgeDeskUITests"
-               ReferencedContainer = "container:KumikoKnowledgeDesk.xcodeproj">
+               BuildableName = "KumikoSenseiUITests.xctest"
+               BlueprintName = "KumikoSenseiUITests"
+               ReferencedContainer = "container:KumikoSensei.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -68,8 +68,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A10000000000000000000010"
             BuildableName = "Kumiko Sensei.app"
-            BlueprintName = "KumikoKnowledgeDesk"
-            ReferencedContainer = "container:KumikoKnowledgeDesk.xcodeproj">
+            BlueprintName = "KumikoSensei"
+            ReferencedContainer = "container:KumikoSensei.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -85,8 +85,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A10000000000000000000010"
             BuildableName = "Kumiko Sensei.app"
-            BlueprintName = "KumikoKnowledgeDesk"
-            ReferencedContainer = "container:KumikoKnowledgeDesk.xcodeproj">
+            BlueprintName = "KumikoSensei"
+            ReferencedContainer = "container:KumikoSensei.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

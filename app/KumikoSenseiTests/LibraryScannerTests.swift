@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import KumikoKnowledgeDesk
+@testable import KumikoSensei
 
 struct LibraryScannerTests {
     @Test func discoversSessionsAndInboxInPreviewLibrary() {

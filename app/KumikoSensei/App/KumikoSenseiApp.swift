@@ -17,7 +17,7 @@ final class UIState {
 }
 
 @main
-struct KumikoKnowledgeDeskApp: App {
+struct KumikoSenseiApp: App {
     @State private var store: LibraryStore
     @State private var ui = UIState()
 

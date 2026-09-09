@@ -1,5 +1,5 @@
 import Testing
-@testable import KumikoKnowledgeDesk
+@testable import KumikoSensei
 
 struct FrontMatterTests {
     @Test func parsesQuotedFieldsCommentsAndLists() {

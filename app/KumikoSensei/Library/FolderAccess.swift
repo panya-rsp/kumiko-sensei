@@ -43,7 +43,7 @@ enum FolderAccess {
         }
         let fm = FileManager.default
         let support = try fm.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        let destination = support.appending(path: "KumikoKnowledgeDesk/SampleLibrary")
+        let destination = support.appending(path: "KumikoSensei/SampleLibrary")
         if fm.fileExists(atPath: destination.path) { try fm.removeItem(at: destination) }
         try fm.createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true)
         try fm.copyItem(at: source, to: destination)
