@@ -22,4 +22,4 @@ For a PR review pack, set `visual_format: pr-review-pack` and fill in the PR rev
 
 ## Kumiko Sensei (mac app)
 
-The native macOS knowledge browser lives in `app/` at the repo root (Xcode project, sources, tests, `Tools/`). When asked to build or change it, read `sessions/2026-09-07--kumiko-knowledge-desk/visual-brief.md` in full before making implementation decisions. Keep the local Markdown/session library as the source of truth, and follow the brief's acceptance checks and explicit no-GitHub/no-hidden-model boundaries.
+The native macOS knowledge browser lives in `app/` at the repo root (Xcode project, sources, tests, `Tools/`). When asked to build or change it, read `sessions/2026-09-07--kumiko-sensei/visual-brief.md` in full before making implementation decisions. Keep the local Markdown/session library as the source of truth, and follow the brief's acceptance checks and explicit no-GitHub/no-hidden-model boundaries.
