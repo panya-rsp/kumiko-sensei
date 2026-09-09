@@ -1,0 +1,60 @@
+{
+  "fill": {
+    "solid": "extended-srgb:0.55000,0.72000,0.95000,1.00000"
+  },
+  "groups": [
+    {
+      "layers": [
+        {
+          "image-name": "kumiko-foreground.png",
+          "name": "kumiko",
+          "position": {
+            "scale": 0.85,
+            "translation-in-points": [
+              49.4140625,
+              67.6796875
+            ]
+          }
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.4
+      },
+      "specular": true,
+      "translucency": {
+        "enabled": true,
+        "value": 0.35
+      }
+    },
+    {
+      "layers": [
+        {
+          "glass": false,
+          "image-name": "background.png",
+          "image-name-specializations": [
+            {
+              "appearance": "dark",
+              "value": "dark-background.png"
+            }
+          ],
+          "name": "background"
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.5
+      },
+      "translucency": {
+        "enabled": true,
+        "value": 0.5
+      }
+    }
+  ],
+  "supported-platforms": {
+    "circles": [
+      "watchOS"
+    ],
+    "squares": "shared"
+  }
+}
