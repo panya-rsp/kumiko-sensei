@@ -6,6 +6,33 @@
     {
       "layers": [
         {
+          "blend-mode": "normal",
+          "image-name": "kumiko-sensei-mascot.png",
+          "name": "kumiko-sensei-mascot",
+          "position-specializations": [
+            {
+              "value": {
+                "scale": 1,
+                "translation-in-points": [
+                  104.7890625,
+                  203.5
+                ]
+              }
+            },
+            {
+              "idiom": "square",
+              "value": {
+                "scale": 1.5,
+                "translation-in-points": [
+                  120.23829572951331,
+                  460.01084603348227
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "hidden": true,
           "image-name": "kumiko-foreground.png",
           "name": "kumiko",
           "position": {
@@ -32,13 +59,13 @@
         {
           "glass": false,
           "image-name": "background.png",
+          "name": "background",
           "image-name-specializations": [
             {
               "appearance": "dark",
               "value": "dark-background.png"
             }
-          ],
-          "name": "background"
+          ]
         }
       ],
       "shadow": {

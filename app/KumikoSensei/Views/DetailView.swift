@@ -27,7 +27,7 @@ struct DetailView: View {
             ToolbarItemGroup(placement: .automatic) {
                 Button { store.toggleFavorite(item.id) } label: {
                     Label(isFavorite ? "Unfavorite" : "Favorite", systemImage: isFavorite ? "star.fill" : "star")
-                        .foregroundStyle(isFavorite ? Palette.sun : .primary)
+                        .foregroundStyle(isFavorite ? Palette.accentYellow : .primary)
                 }
                 .keyboardShortcut("d")
                 .help(isFavorite ? "Remove from Favorites (⌘D)" : "Add to Favorites (⌘D)")
@@ -40,7 +40,7 @@ struct DetailView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 8) {
-                Text((item.kind == .session ? "Session" : "Inbox handoff").uppercased()).font(.deskLabel).tracking(0.8).foregroundStyle(Palette.mint)
+                Text((item.kind == .session ? "Session" : "Inbox handoff").uppercased()).font(.deskLabel).tracking(0.8).foregroundStyle(Palette.secondary)
                 if item.isPRReviewPack { ReviewPackTag() }
                 Spacer()
                 StatusMark(completion: item.completion)
@@ -77,7 +77,7 @@ struct DetailView: View {
             if let text = item.takeaway {
                 InlineText(text: text).font(.deskTakeaway).foregroundStyle(Palette.ink).lineSpacing(4).textSelection(.enabled)
             } else {
-                EmptyNote(text: "No one-line takeaway is recorded in handoff.md or visual-brief.md. Add one under “# One-line takeaway”.", tone: Palette.coral)
+                EmptyNote(text: "No one-line takeaway is recorded in handoff.md or visual-brief.md. Add one under “# One-line takeaway”.", tone: Palette.error)
             }
         }
     }
@@ -91,7 +91,7 @@ struct DetailView: View {
             } else {
                 ForEach(sections) { section in
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(section.title).font(.headline).foregroundStyle(Palette.ink).accessibilityAddTraits(.isHeader)
+                        Text(section.title).font(.inter(.headline, .semibold)).foregroundStyle(Palette.ink).accessibilityAddTraits(.isHeader)
                         MarkdownView(markdown: section.body)
                     }
                     .padding(.bottom, 6)
@@ -109,11 +109,11 @@ struct DetailView: View {
                           ? "Marked as a PR review pack, but pr-review-pack.md has not been written yet."
                           : "Not a PR review pack. Compose one with the pr-review-pack format when a change needs reviewer context.")
             } else {
-                Panel(fill: item.isPRReviewPack ? Palette.indigoWash : Palette.card) {
+                Panel(fill: item.isPRReviewPack ? Palette.primaryWash : Palette.card) {
                     VStack(alignment: .leading, spacing: 14) {
                         ForEach(sections) { section in
                             VStack(alignment: .leading, spacing: 6) {
-                                Text(section.title).font(.headline).foregroundStyle(Palette.indigo).accessibilityAddTraits(.isHeader)
+                                Text(section.title).font(.inter(.headline, .semibold)).foregroundStyle(Palette.primary).accessibilityAddTraits(.isHeader)
                                 MarkdownView(markdown: section.body)
                             }
                         }
@@ -130,7 +130,7 @@ struct DetailView: View {
         Panel {
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
-                    Text("Claude Code relay").font(.headline).foregroundStyle(Palette.ink)
+                    Text("Claude Code relay").font(.inter(.headline, .semibold)).foregroundStyle(Palette.ink)
                     Spacer()
                     Button(copied ? "Copied" : "Copy relay text") {
                         FolderAccess.copyToPasteboard(item.relayText)
@@ -139,14 +139,14 @@ struct DetailView: View {
                     }
                     .keyboardShortcut("c", modifiers: [.command, .shift])
                 }
-                Text(item.relayText).font(.callout).foregroundStyle(Palette.inkMuted).textSelection(.enabled)
+                Text(item.relayText).font(.inter(.callout)).foregroundStyle(Palette.inkMuted).textSelection(.enabled)
                 if let relay = item.relaySection, !relay.isEmpty {
                     Divider()
-                    Text("From pr-review-pack.md").font(.caption).foregroundStyle(Palette.inkMuted)
+                    Text("From pr-review-pack.md").font(.inter(.caption)).foregroundStyle(Palette.inkMuted)
                     MarkdownView(markdown: relay.body)
                 }
                 Text("Kumiko-sensei has no GitHub access. Paste this into your authorized Claude Code session; nothing is sent from this app.")
-                    .font(.caption).foregroundStyle(Palette.inkMuted)
+                    .font(.inter(.caption)).foregroundStyle(Palette.inkMuted)
             }
         }
     }
@@ -156,7 +156,7 @@ struct DetailView: View {
             SectionHeader(number: 5, title: "Evidence", subtitle: "What the source files cite. A listed check is a claim to verify, not proof that it ran.")
             HStack(spacing: 8) {
                 Circle().fill(item.completion.color).frame(width: 8, height: 8)
-                Text(verificationSummary).font(.callout).foregroundStyle(Palette.ink)
+                Text(verificationSummary).font(.inter(.callout)).foregroundStyle(Palette.ink)
             }
             if item.evidence.isEmpty {
                 EmptyNote(text: "No “Evidence to verify” section was found in the source files.")
@@ -165,21 +165,21 @@ struct DetailView: View {
                     ForEach(item.evidence) { entry in
                         HStack(alignment: .firstTextBaseline, spacing: 10) {
                             Image(systemName: entry.isUnverified ? "questionmark.circle" : "doc.text.magnifyingglass")
-                                .foregroundStyle(entry.isUnverified ? Palette.coral : Palette.indigo)
+                                .foregroundStyle(entry.isUnverified ? Palette.error : Palette.primary)
                                 .accessibilityLabel(entry.isUnverified ? "Unverified or proposed" : "Cited evidence")
                             MarkdownView(markdown: entry.text)
                         }
                     }
                 }
-                Text("Coral marks evidence the text itself calls unverified, proposed, or not yet performed.").font(.caption).foregroundStyle(Palette.inkMuted)
+                Text("Coral marks evidence the text itself calls unverified, proposed, or not yet performed.").font(.inter(.caption)).foregroundStyle(Palette.inkMuted)
             }
             if !item.accuracyConstraints.isEmpty {
-                Panel(fill: Palette.coralWash) {
+                Panel(fill: Palette.errorWash) {
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("Must not be inferred").font(.headline).foregroundStyle(Palette.coral)
+                        Text("Must not be inferred").font(.inter(.headline, .semibold)).foregroundStyle(Palette.error)
                         ForEach(Array(item.accuracyConstraints.enumerated()), id: \.offset) { _, line in
                             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                                Text("•").foregroundStyle(Palette.coral)
+                                Text("•").foregroundStyle(Palette.error)
                                 MarkdownView(markdown: line)
                             }
                         }
@@ -221,14 +221,14 @@ struct DetailView: View {
             .background(RoundedRectangle(cornerRadius: 14).fill(Palette.card))
             .overlay(RoundedRectangle(cornerRadius: 14).stroke(Palette.rule, lineWidth: 1))
             if item.sourceFiles.isEmpty {
-                EmptyNote(text: "No Markdown source files were found for this entry.", tone: Palette.coral)
+                EmptyNote(text: "No Markdown source files were found for this entry.", tone: Palette.error)
             }
         }
     }
 
     private func fileRow(url: URL, label: String, icon: String) -> some View {
         HStack(spacing: 10) {
-            Image(systemName: icon).foregroundStyle(Palette.indigo).frame(width: 18)
+            Image(systemName: icon).foregroundStyle(Palette.primary).frame(width: 18)
             Text(label).font(.callout.monospaced()).foregroundStyle(Palette.ink).lineLimit(1).truncationMode(.middle)
             Spacer()
             Button("Reveal") { FolderAccess.reveal(url) }.accessibilityLabel("Reveal \(label) in Finder")

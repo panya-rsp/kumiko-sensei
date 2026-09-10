@@ -47,7 +47,7 @@ struct LibraryListView: View {
         HStack(alignment: .firstTextBaseline) {
             Text(filter.title).font(.deskSection).foregroundStyle(Palette.ink)
             Spacer()
-            Text("\(items.count) \(items.count == 1 ? "note" : "notes")").font(.caption).foregroundStyle(Palette.inkMuted)
+            Text("\(items.count) \(items.count == 1 ? "note" : "notes")").font(.inter(.caption)).foregroundStyle(Palette.inkMuted)
             if !store.warnings.isEmpty {
                 Image(systemName: "info.circle").foregroundStyle(Palette.inkMuted)
                     .help(store.warnings.joined(separator: "\n"))
@@ -83,17 +83,17 @@ struct KnowledgeCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 7) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(item.title).font(.system(.headline, design: .rounded, weight: .semibold)).foregroundStyle(Palette.ink).lineLimit(2)
+                Text(item.title).font(.inter(.headline, .semibold)).foregroundStyle(Palette.ink).lineLimit(2)
                 Spacer(minLength: 4)
-                if isFavorite { Image(systemName: "star.fill").font(.caption).foregroundStyle(Palette.sun) }
+                if isFavorite { Image(systemName: "star.fill").font(.inter(.caption)).foregroundStyle(Palette.accentYellow) }
             }
             if let takeaway = item.takeaway {
-                Text(InlineMarkdown.attributed(takeaway)).font(.subheadline).foregroundStyle(Palette.inkMuted).lineLimit(2)
+                Text(InlineMarkdown.attributed(takeaway)).font(.inter(.subheadline)).foregroundStyle(Palette.inkMuted).lineLimit(2)
             } else {
-                Text("No one-line takeaway recorded yet.").font(.subheadline).italic().foregroundStyle(Palette.inkMuted.opacity(0.8))
+                Text("No one-line takeaway recorded yet.").font(.inter(.subheadline)).italic().foregroundStyle(Palette.inkMuted.opacity(0.8))
             }
             HStack(spacing: 6) {
-                Text(metaLine).font(.caption).foregroundStyle(Palette.inkMuted).lineLimit(1)
+                Text(metaLine).font(.inter(.caption)).foregroundStyle(Palette.inkMuted).lineLimit(1)
                 Spacer()
                 if item.isPRReviewPack { ReviewPackTag() }
                 StatusMark(completion: item.completion)

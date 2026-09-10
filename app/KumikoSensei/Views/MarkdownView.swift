@@ -11,7 +11,7 @@ enum InlineMarkdown {
         for run in result.runs {
             if let intent = run.inlinePresentationIntent, intent.contains(.code) {
                 result[run.range].font = .system(.body, design: .monospaced)
-                result[run.range].foregroundColor = Palette.sky
+                result[run.range].foregroundColor = Palette.info
             }
         }
         return result
@@ -45,11 +45,11 @@ struct MarkdownView: View {
         switch block {
         case .heading(let level, let text):
             InlineText(text: text)
-                .font(level <= 2 ? .title3.weight(.semibold) : .headline)
+                .font(level <= 2 ? .inter(.title3, .semibold) : .inter(.headline, .semibold))
                 .padding(.top, level <= 2 ? 8 : 4)
                 .accessibilityAddTraits(.isHeader)
         case .paragraph(let text):
-            InlineText(text: text).font(.body).lineSpacing(3)
+            InlineText(text: text).font(.inter()).lineSpacing(3)
         case .bullets(let items):
             listView(items, numbered: false)
         case .numbered(let items):
@@ -62,22 +62,22 @@ struct MarkdownView: View {
             .overlay(RoundedRectangle(cornerRadius: 8).stroke(Palette.rule, lineWidth: 1))
         case .quote(let text):
             HStack(alignment: .top, spacing: 10) {
-                RoundedRectangle(cornerRadius: 1).fill(Palette.indigo.opacity(0.6)).frame(width: 3)
-                InlineText(text: text).font(.body).foregroundStyle(Palette.inkMuted)
+                RoundedRectangle(cornerRadius: 1).fill(Palette.primary.opacity(0.6)).frame(width: 3)
+                InlineText(text: text).font(.inter()).foregroundStyle(Palette.inkMuted)
             }
         case .table(let header, let rows):
             ScrollView(.horizontal) {
                 Grid(alignment: .topLeading, horizontalSpacing: 18, verticalSpacing: 6) {
                     GridRow {
                         ForEach(Array(header.enumerated()), id: \.offset) { _, cell in
-                            InlineText(text: cell).font(.callout.weight(.semibold))
+                            InlineText(text: cell).font(.inter(.callout, .semibold))
                         }
                     }
                     Divider().gridCellUnsizedAxes(.horizontal)
                     ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
                         GridRow {
                             ForEach(Array(row.enumerated()), id: \.offset) { _, cell in
-                                InlineText(text: cell).font(.callout).frame(maxWidth: 360, alignment: .leading)
+                                InlineText(text: cell).font(.inter(.callout)).frame(maxWidth: 360, alignment: .leading)
                             }
                         }
                     }
@@ -97,9 +97,9 @@ struct MarkdownView: View {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     Text(numbered ? "\(index + 1)." : "•")
                         .font(.body.monospacedDigit())
-                        .foregroundStyle(Palette.indigo)
+                        .foregroundStyle(Palette.primary)
                         .frame(minWidth: numbered ? 22 : 10, alignment: .trailing)
-                    InlineText(text: item.text).font(.body).lineSpacing(2)
+                    InlineText(text: item.text).font(.inter()).lineSpacing(2)
                 }
                 .padding(.leading, CGFloat(item.indent) * 18)
             }

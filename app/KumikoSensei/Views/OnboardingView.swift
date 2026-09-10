@@ -10,13 +10,13 @@ struct OnboardingView: View {
             VStack(spacing: 8) {
                 Text("Kumiko Sensei").font(.deskTitle).foregroundStyle(Palette.ink)
                 Text("A calm, local home for the decisions, visual explanations, and open questions behind your code.")
-                    .font(.title3).foregroundStyle(Palette.inkMuted).multilineTextAlignment(.center).frame(maxWidth: 460)
+                    .font(.inter(.title3)).foregroundStyle(Palette.inkMuted).multilineTextAlignment(.center).frame(maxWidth: 460)
             }
             if case .accessLost(let message) = store.state {
-                Panel(fill: Palette.coralWash) {
+                Panel(fill: Palette.errorWash) {
                     HStack(alignment: .top, spacing: 10) {
-                        Image(systemName: "exclamationmark.triangle").foregroundStyle(Palette.coral)
-                        Text(message).font(.callout).foregroundStyle(Palette.ink)
+                        Image(systemName: "exclamationmark.triangle").foregroundStyle(Palette.error)
+                        Text(message).font(.inter(.callout)).foregroundStyle(Palette.ink)
                     }
                 }
                 .frame(maxWidth: 520)
@@ -36,7 +36,7 @@ struct OnboardingView: View {
                 bullet("Remembers the folder with a security-scoped bookmark you can revoke any time.")
                 bullet("No GitHub access, cloud sync, telemetry, or hidden model calls.")
             }
-            .font(.callout).foregroundStyle(Palette.inkMuted).frame(maxWidth: 520)
+            .font(.inter(.callout)).foregroundStyle(Palette.inkMuted).frame(maxWidth: 520)
         }
         .padding(40)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -46,7 +46,7 @@ struct OnboardingView: View {
 
     private func bullet(_ text: String) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: 8) {
-            Circle().fill(Palette.mint).frame(width: 6, height: 6).offset(y: -2)
+            Circle().fill(Palette.secondary).frame(width: 6, height: 6).offset(y: -2)
             Text(text).fixedSize(horizontal: false, vertical: true)
         }
     }

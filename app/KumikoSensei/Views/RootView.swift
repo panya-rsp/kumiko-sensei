@@ -80,6 +80,10 @@ struct RootView: View {
                 DetailEmptyView()
             }
         }
+        .inspector(isPresented: $ui.showNotes) {
+            NotesPane(item: store.item(id: ui.selectedItemID))
+                .inspectorColumnWidth(min: 260, ideal: 360, max: 720)
+        }
         .deskWindowBackground()
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
@@ -100,6 +104,9 @@ struct RootView: View {
                     .help("Search the library (⌘K)")
                     .accessibilityIdentifier("toolbar.search")
                     .accessibilityHint("Opens Spotlight-style local search")
+                Button { ui.showNotes.toggle() } label: { Label("Notes", systemImage: ui.showNotes ? "note.text" : "note") }
+                    .help(ui.showNotes ? "Hide my notes (⌥⌘I)" : "Show my notes for this entry (⌥⌘I)")
+                    .accessibilityIdentifier("toolbar.notes")
             }
         }
     }
@@ -118,14 +125,14 @@ struct SidebarView: View {
             }
             Section("Repositories") {
                 if store.repositories.isEmpty {
-                    Text("No source repositories recorded").font(.caption).foregroundStyle(.secondary)
+                    Text("No source repositories recorded").font(.inter(.caption)).foregroundStyle(.secondary)
                 } else {
                     ForEach(store.repositories, id: \.self) { row(.repository($0)) }
                 }
             }
             Section("Tags") {
                 if store.tags.isEmpty {
-                    Text("No tags yet. Add `tags:` to a handoff's front matter.").font(.caption).foregroundStyle(.secondary)
+                    Text("No tags yet. Add `tags:` to a handoff's front matter.").font(.inter(.caption)).foregroundStyle(.secondary)
                 } else {
                     ForEach(store.tags, id: \.self) { row(.tag($0)) }
                 }
@@ -136,8 +143,8 @@ struct SidebarView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Divider()
                 if let root = store.rootURL {
-                    Text(root.lastPathComponent).font(.caption.weight(.medium)).foregroundStyle(.secondary).lineLimit(1)
-                    Text(store.isWatching ? "Watching for changes" : "Manual refresh (⌘R)").font(.caption2).foregroundStyle(.tertiary)
+                    Text(root.lastPathComponent).font(.inter(.caption, .medium)).foregroundStyle(.secondary).lineLimit(1)
+                    Text(store.isWatching ? "Watching for changes" : "Manual refresh (⌘R)").font(.inter(.caption2)).foregroundStyle(.tertiary)
                 }
             }
             .padding(.horizontal, 12).padding(.bottom, 8)
@@ -175,12 +182,12 @@ struct DetailEmptyView: View {
             if store.items.isEmpty {
                 Text("The library is empty").font(.deskTitle).foregroundStyle(Palette.ink)
                 Text("Sessions live in sessions/ and pending work in handoffs/inbox/. Compose a handoff to start.")
-                    .font(.callout).foregroundStyle(Palette.inkMuted).multilineTextAlignment(.center).frame(maxWidth: 380)
+                    .font(.inter(.callout)).foregroundStyle(Palette.inkMuted).multilineTextAlignment(.center).frame(maxWidth: 380)
                 Button("New Handoff…") { ui.showComposer = true }.buttonStyle(.borderedProminent)
             } else {
                 Text("Pick a note to read it").font(.deskTitle).foregroundStyle(Palette.ink)
                 Text("Takeaway first, then the visual, the explanation, the review guide, and the evidence behind it.")
-                    .font(.callout).foregroundStyle(Palette.inkMuted).multilineTextAlignment(.center).frame(maxWidth: 380)
+                    .font(.inter(.callout)).foregroundStyle(Palette.inkMuted).multilineTextAlignment(.center).frame(maxWidth: 380)
                 Button("Search library  ⌘K") { ui.showSearch = true }.buttonStyle(.bordered)
             }
         }

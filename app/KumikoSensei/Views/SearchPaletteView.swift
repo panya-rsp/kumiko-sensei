@@ -16,7 +16,7 @@ struct SearchPaletteView: View {
                 Image(systemName: "magnifyingglass").foregroundStyle(.secondary)
                 TextField("Search titles, takeaways, evidence paths, symbols, ticket or PR IDs…", text: $query)
                     .textFieldStyle(.plain)
-                    .font(.title3)
+                    .font(.inter(.title3))
                     .focused($focused)
                     .onSubmit(openHighlighted)
                     .onKeyPress(.downArrow) { move(1); return .handled }
@@ -33,9 +33,9 @@ struct SearchPaletteView: View {
             Divider()
             if query.trimmingCharacters(in: .whitespaces).isEmpty {
                 VStack(spacing: 8) {
-                    Text("Local search across \(store.items.count) notes").font(.headline).foregroundStyle(.primary)
+                    Text("Local search across \(store.items.count) notes").font(.inter(.headline, .semibold)).foregroundStyle(.primary)
                     Text("Matches filenames, titles, takeaways, evidence paths, symbols, tags, ticket and PR IDs, and review-guide text. ↑↓ to move, ⏎ to open, esc to close.")
-                        .font(.callout).foregroundStyle(.secondary).multilineTextAlignment(.center).frame(maxWidth: 460)
+                        .font(.inter(.callout)).foregroundStyle(.secondary).multilineTextAlignment(.center).frame(maxWidth: 460)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if hits.isEmpty {
@@ -58,7 +58,7 @@ struct SearchPaletteView: View {
                 }
                 Divider()
                 Text("\(hits.count) match\(hits.count == 1 ? "" : "es") · nothing leaves this Mac")
-                    .font(.caption).foregroundStyle(.secondary).padding(8)
+                    .font(.inter(.caption)).foregroundStyle(.secondary).padding(8)
             }
         }
         .frame(width: 700, height: 480)
@@ -96,18 +96,18 @@ struct SearchHitRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(alignment: .firstTextBaseline) {
-                Text(hit.item.title).font(.headline).foregroundStyle(.primary).lineLimit(1)
+                Text(hit.item.title).font(.inter(.headline, .semibold)).foregroundStyle(.primary).lineLimit(1)
                 Spacer()
-                Text("matched \(hit.matchedField.label)").font(.caption2).foregroundStyle(.secondary)
+                Text("matched \(hit.matchedField.label)").font(.inter(.caption2)).foregroundStyle(.secondary)
             }
             if !hit.excerpt.isEmpty {
-                Text(hit.excerpt).font(.callout).foregroundStyle(.secondary).lineLimit(2)
+                Text(hit.excerpt).font(.inter(.callout)).foregroundStyle(.secondary).lineLimit(2)
             }
             Text([hit.item.id, hit.item.dateText].joined(separator: "  ·  ")).font(.caption.monospaced()).foregroundStyle(.tertiary).lineLimit(1)
         }
         .padding(10)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(RoundedRectangle(cornerRadius: 8).fill(isHighlighted ? Palette.indigo.opacity(0.18) : Color.clear))
+        .background(RoundedRectangle(cornerRadius: 8).fill(isHighlighted ? Palette.primary.opacity(0.18) : Color.clear))
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(hit.item.title). \(hit.excerpt)")

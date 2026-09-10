@@ -8,6 +8,7 @@ final class UIState {
     var showSearch = false
     var showComposer = false
     var showAsk = false
+    var showNotes = false
     var searchSeed = ""
 
     func open(_ item: KnowledgeItem, favorites: Set<String>) {
@@ -22,6 +23,8 @@ struct KumikoSenseiApp: App {
     @State private var ui = UIState()
 
     init() {
+        Inter.register()
+        if DevLaunch.forceDark { NSApplication.shared.appearance = NSAppearance(named: .darkAqua) }
         let store = LibraryStore(restoreBookmark: DevLaunch.libraryPath == nil && !DevLaunch.useSampleLibrary)
         if let path = DevLaunch.libraryPath {
             store.open(URL(fileURLWithPath: path, isDirectory: true), remember: false)
@@ -55,6 +58,9 @@ struct KumikoSenseiApp: App {
                     .disabled(store.rootURL == nil)
                 Button("Refresh") { store.rescan() }
                     .keyboardShortcut("r")
+                    .disabled(store.rootURL == nil)
+                Toggle("Show Notes", isOn: Binding(get: { ui.showNotes }, set: { ui.showNotes = $0 }))
+                    .keyboardShortcut("i", modifiers: [.command, .option])
                     .disabled(store.rootURL == nil)
                 Divider()
                 Button("Reveal Library in Finder") { store.rootURL.map(FolderAccess.reveal) }

@@ -24,7 +24,7 @@ struct AskKumikoView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Ask Kumiko").font(.deskTitle).foregroundStyle(Palette.ink)
                     Text("Writes a local question draft with the sessions and evidence you pick. No model is called from this app; you hand the prompt to Kumiko-sensei or Claude Code yourself.")
-                        .font(.callout).foregroundStyle(Palette.inkMuted).fixedSize(horizontal: false, vertical: true)
+                        .font(.inter(.callout)).foregroundStyle(Palette.inkMuted).fixedSize(horizontal: false, vertical: true)
                 }
             }
             .padding(20)
@@ -32,16 +32,16 @@ struct AskKumikoView: View {
             if let result { resultView(result) } else { composer }
         }
         .frame(width: 680, height: 600)
-        .background(Palette.paper)
+        .background(Palette.surface)
         .onAppear { if let preselectedID { selected = [preselectedID] } }
     }
 
     private var composer: some View {
         VStack(alignment: .leading, spacing: 14) {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Question").font(.callout).foregroundStyle(Palette.inkMuted)
+                Text("Question").font(.inter(.callout)).foregroundStyle(Palette.inkMuted)
                 TextEditor(text: $question)
-                    .font(.body)
+                    .font(.inter())
                     .frame(height: 96)
                     .scrollContentBackground(.hidden)
                     .padding(6)
@@ -50,14 +50,14 @@ struct AskKumikoView: View {
                     .accessibilityLabel("Question for Kumiko")
             }
             HStack {
-                Text("Attach sessions (\(selected.count) selected)").font(.callout).foregroundStyle(Palette.inkMuted)
+                Text("Attach sessions (\(selected.count) selected)").font(.inter(.callout)).foregroundStyle(Palette.inkMuted)
                 Spacer()
                 TextField("Filter", text: $filter).textFieldStyle(.roundedBorder).frame(width: 220)
             }
             List(candidates) { item in
                 Toggle(isOn: Binding(get: { selected.contains(item.id) }, set: { on in if on { selected.insert(item.id) } else { selected.remove(item.id) } })) {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(item.title).font(.callout).foregroundStyle(Palette.ink).lineLimit(1)
+                        Text(item.title).font(.inter(.callout)).foregroundStyle(Palette.ink).lineLimit(1)
                         Text(item.id).font(.caption.monospaced()).foregroundStyle(Palette.inkMuted).lineLimit(1)
                     }
                 }
@@ -66,7 +66,7 @@ struct AskKumikoView: View {
             .listStyle(.inset)
             .frame(minHeight: 160)
             HStack {
-                if let error { Text(error).font(.callout).foregroundStyle(Palette.coral) }
+                if let error { Text(error).font(.inter(.callout)).foregroundStyle(Palette.error) }
                 Spacer()
                 Button("Cancel") { dismiss() }.keyboardShortcut(.cancelAction)
                 Button("Create Question Draft") { create() }.keyboardShortcut(.defaultAction).buttonStyle(.borderedProminent)
@@ -91,14 +91,14 @@ struct AskKumikoView: View {
     private func resultView(_ draft: AskKumikoDraft) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 8) {
-                Circle().fill(Palette.coral).frame(width: 8, height: 8)
-                Text("Question saved to \(LibraryScanner.relativePath(of: draft.fileURL, from: store.rootURL ?? draft.fileURL))").font(.headline).foregroundStyle(Palette.ink)
+                Circle().fill(Palette.error).frame(width: 8, height: 8)
+                Text("Question saved to \(LibraryScanner.relativePath(of: draft.fileURL, from: store.rootURL ?? draft.fileURL))").font(.inter(.headline, .semibold)).foregroundStyle(Palette.ink)
             }
-            Text("It appears in the inbox as an open question until an answer is saved back into the library.").font(.callout).foregroundStyle(Palette.inkMuted)
+            Text("It appears in the inbox as an open question until an answer is saved back into the library.").font(.inter(.callout)).foregroundStyle(Palette.inkMuted)
             Panel {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Prompt to hand over").font(.headline).foregroundStyle(Palette.ink)
-                    Text(draft.prompt).font(.callout).foregroundStyle(Palette.inkMuted).textSelection(.enabled)
+                    Text("Prompt to hand over").font(.inter(.headline, .semibold)).foregroundStyle(Palette.ink)
+                    Text(draft.prompt).font(.inter(.callout)).foregroundStyle(Palette.inkMuted).textSelection(.enabled)
                 }
             }
             HStack {

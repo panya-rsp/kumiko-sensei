@@ -22,7 +22,7 @@ Select the `KumikoSensei` scheme and press Run. On first launch choose your Chea
 xcodebuild -project KumikoSensei.xcodeproj -scheme KumikoSensei \
   -configuration Debug -derivedDataPath .build build
 
-# Unit tests (22 tests: front matter, Markdown, scanner, search, composer)
+# Unit tests (24 tests: front matter, Markdown, scanner, search, composer, notes, media feedback)
 xcodebuild -project KumikoSensei.xcodeproj -scheme KumikoSensei \
   -derivedDataPath .build -destination 'platform=macOS' \
   -only-testing:KumikoSenseiTests test
@@ -40,6 +40,7 @@ The app accepts a few arguments for previews and screenshots:
 | `--sample-library` | Installs and opens `PreviewLibrary/` instead of restoring the bookmark |
 | `--library <path>` | Opens a folder directly. Works only in a non-sandboxed dev build (see below) |
 | `--snapshot-dir <dir>` | Walks the main screens and writes PNG captures there, then quits |
+| `--dark` | Forces the dark appearance for this launch only, without changing System Settings |
 
 Non-sandboxed dev build for `--library` and offscreen screenshots:
 

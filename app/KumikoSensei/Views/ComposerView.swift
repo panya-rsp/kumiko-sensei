@@ -13,7 +13,7 @@ struct ComposerView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("New handoff").font(.deskTitle).foregroundStyle(Palette.ink)
-                    Text("Writes a template-compatible Markdown file into handoffs/inbox/. No GitHub, no model.").font(.caption).foregroundStyle(Palette.inkMuted)
+                    Text("Writes a template-compatible Markdown file into handoffs/inbox/. No GitHub, no model.").font(.inter(.caption)).foregroundStyle(Palette.inkMuted)
                 }
                 Spacer()
                 MascotBadge(size: 52).accessibilityHidden(true)
@@ -27,7 +27,7 @@ struct ComposerView: View {
             }
         }
         .frame(width: 680, height: 640)
-        .background(Palette.paper)
+        .background(Palette.surface)
     }
 
     private var form: some View {
@@ -69,7 +69,7 @@ struct ComposerView: View {
             .scrollContentBackground(.hidden)
             Divider()
             HStack {
-                if let error { Text(error).font(.callout).foregroundStyle(Palette.coral) }
+                if let error { Text(error).font(.inter(.callout)).foregroundStyle(Palette.error) }
                 Spacer()
                 Button("Cancel") { dismiss() }.keyboardShortcut(.cancelAction)
                 Button("Create Handoff") { create() }.keyboardShortcut(.defaultAction).buttonStyle(.borderedProminent)
@@ -81,9 +81,9 @@ struct ComposerView: View {
 
     private func editor(_ label: String, _ text: Binding<String>) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(label).font(.callout).foregroundStyle(Palette.inkMuted)
+            Text(label).font(.inter(.callout)).foregroundStyle(Palette.inkMuted)
             TextEditor(text: text)
-                .font(.body)
+                .font(.inter())
                 .frame(minHeight: 54)
                 .scrollContentBackground(.hidden)
                 .padding(6)
@@ -109,18 +109,18 @@ struct ComposerView: View {
         let prompt = "Open Cheatbook in Codex and ask: “Process `\(relative)` and create the requested visual.”"
         return VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 8) {
-                Circle().fill(Palette.moss).frame(width: 8, height: 8)
-                Text("Created \(relative)").font(.headline).foregroundStyle(Palette.ink)
+                Circle().fill(Palette.success).frame(width: 8, height: 8)
+                Text("Created \(relative)").font(.inter(.headline, .semibold)).foregroundStyle(Palette.ink)
             }
             Text("The file is now in the inbox and will appear under “Inbox / needs attention”. Fill in anything you skipped in your editor, then hand it to Kumiko-sensei.")
-                .font(.callout).foregroundStyle(Palette.inkMuted)
+                .font(.inter(.callout)).foregroundStyle(Palette.inkMuted)
             Panel {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Next step").font(.headline).foregroundStyle(Palette.ink)
-                    Text(prompt).font(.callout).foregroundStyle(Palette.inkMuted).textSelection(.enabled)
+                    Text("Next step").font(.inter(.headline, .semibold)).foregroundStyle(Palette.ink)
+                    Text(prompt).font(.inter(.callout)).foregroundStyle(Palette.inkMuted).textSelection(.enabled)
                     if draft.format == .prReviewPack {
                         Text("After Kumiko-sensei returns pr-review-pack.md, the session's detail view offers the Claude Code relay text for the live PR.")
-                            .font(.caption).foregroundStyle(Palette.inkMuted)
+                            .font(.inter(.caption)).foregroundStyle(Palette.inkMuted)
                     }
                 }
             }

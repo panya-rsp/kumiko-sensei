@@ -11,6 +11,7 @@ enum DevLaunch {
     static var libraryPath: String? { value(for: "--library") }
     static var snapshotDirectory: String? { value(for: "--snapshot-dir") }
     static var useSampleLibrary: Bool { CommandLine.arguments.contains("--sample-library") }
+    static var forceDark: Bool { CommandLine.arguments.contains("--dark") }
 }
 
 @MainActor
@@ -53,6 +54,13 @@ enum SnapshotRunner {
         ui.showAsk = true
         try? await Task.sleep(for: .seconds(2))
         capture(sheetWindow ?? primaryWindow, to: out.appending(path: "06-ask-kumiko.png"))
+        ui.showAsk = false
+        if let first = sessions.first(where: { !$0.media.isEmpty }) ?? sessions.first {
+            ui.open(first, favorites: store.favorites)
+            ui.showNotes = true
+            try? await Task.sleep(for: .seconds(2))
+            capture(primaryWindow, to: out.appending(path: "07-notes-pane.png"))
+        }
         try? await Task.sleep(for: .seconds(0.5))
         NSApp.terminate(nil)
     }
