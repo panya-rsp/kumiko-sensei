@@ -11,7 +11,7 @@ When the user asks what Kumiko-sensei can make, or which format would work best,
 
 ## Inputs
 
-- A required handoff Markdown file in `handoffs/inbox/`.
+- A required handoff Markdown file in `handoffs/inbox/`, or an existing session whose `revisions.md` holds open `- [ ]` feedback items on specific images (see `skills/kumiko-sensei/SKILL.md`, Revisions).
 - An optional source repository path for evidence verification.
 - This repository's session and media-library conventions.
 

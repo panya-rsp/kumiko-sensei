@@ -8,22 +8,34 @@ if [ "$#" -ne 1 ]; then
 fi
 
 slug=$1
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+cheatbook_dir=$(CDPATH= cd -- "$script_dir/.." && pwd)
+source_dir=$(pwd -P)
+agent_file="$cheatbook_dir/skills/kumiko-sensei/SKILL.md"
+revisions="$cheatbook_dir/sessions/$slug/revisions.md"
+
 case "$slug" in
-  *[!a-z0-9-]* | -* | *- | *--* | "")
-    echo "Slug must use lowercase letters, numbers, and single hyphens." >&2
+  *[!a-z0-9-]* | -* | *- | "")
+    echo "Slug must use lowercase letters, numbers, and hyphens." >&2
     exit 1
     ;;
 esac
 
-script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-cheatbook_dir=$(CDPATH= cd -- "$script_dir/.." && pwd)
-source_dir=$(pwd -P)
-handoff="$cheatbook_dir/handoffs/inbox/$slug.md"
-agent_file="$cheatbook_dir/skills/kumiko-sensei/SKILL.md"
-
-if [ ! -f "$handoff" ]; then
-  echo "Handoff not found: $handoff" >&2
-  exit 1
+if [ -f "$revisions" ]; then
+  task="Process the open revision items (\`- [ ]\`) in $revisions for the session at $cheatbook_dir/sessions/$slug."
+else
+  case "$slug" in
+    *--*)
+      echo "Handoff slugs use single hyphens; a session id is accepted only when sessions/<id>/revisions.md exists." >&2
+      exit 1
+      ;;
+  esac
+  handoff="$cheatbook_dir/handoffs/inbox/$slug.md"
+  if [ ! -f "$handoff" ]; then
+    echo "Handoff not found: $handoff" >&2
+    exit 1
+  fi
+  task="Process the handoff at $handoff."
 fi
 
 if [ ! -f "$agent_file" ]; then
@@ -36,7 +48,7 @@ if ! command -v codex >/dev/null 2>&1; then
   exit 1
 fi
 
-prompt="Read and follow the Kumiko-sensei agent contract at $agent_file. Process the handoff at $handoff. The source project is $source_dir and is available only for evidence verification; do not modify it. This relay is explicit user authorization to generate the requested visual output."
+prompt="Read and follow the Kumiko-sensei agent contract at $agent_file. $task The source project is $source_dir and is available only for evidence verification; do not modify it. This relay is explicit user authorization to generate the requested visual output."
 
 exec codex exec \
   -C "$cheatbook_dir" \

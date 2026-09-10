@@ -62,7 +62,8 @@ struct LibraryScanner: Sendable {
         let date = date(fromSessionID: slug) ?? handoff?.frontMatter["created_at"].flatMap(parseDate) ?? modificationDate(folder)
         let artifactIndex = folder.appending(path: "artifact/index.html")
         let artifactURL = FileManager.default.fileExists(atPath: artifactIndex.path) ? artifactIndex : nil
-        let completion: CompletionState = (!media.isEmpty && (status ?? "").lowercased().contains("generated")) ? .delivered : .inProgress
+        let hasOpenFeedback = revisions?.body.contains("- [ ] ") ?? false
+        let completion: CompletionState = hasOpenFeedback ? .needsAttention : (!media.isEmpty && (status ?? "").lowercased().contains("generated")) ? .delivered : .inProgress
         let allText = docs.map(\.body).joined(separator: "\n")
         let evidenceSource = handoff?.section(titled: "Evidence") ?? brief?.sections.first { MarkdownDocument.normalizedTitle($0.title).contains("evidence") || MarkdownDocument.normalizedTitle($0.title).contains("verification") }
         let accuracy = (handoff?.section(titled: "Accuracy check")?.bullets ?? []) + (brief?.section(titled: "Exclusions").map { section in section.bullets.isEmpty ? [section.body] : section.bullets } ?? [])

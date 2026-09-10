@@ -16,6 +16,8 @@ After saving the handoff, immediately run the relay and wait for it to finish:
 
 Report the returned session and media paths. If the relay cannot run because the Codex CLI is unavailable or a permission is required, report that exact blocker and provide the handoff path as a manual fallback. Do not claim that processing happened if the relay failed.
 
+To revise images the user has left feedback on in Kumiko Sensei, run the same relay with the session id instead of a handoff slug (`ask-kumiko.sh 2026-09-08--example`); it processes the open items in that session's `revisions.md`.
+
 Do not generate the image yourself unless the user asks. The handoff is the durable shared context for the visual agent.
 
 For a PR review pack, set `visual_format: pr-review-pack` and fill in the PR review pack prompts. Once Kumiko-sensei returns the session output, Claude Code is responsible for reading `pr-review-pack.md`, making the generated image available to the live PR, and inserting the generated Markdown at the top of its description. Kumiko-sensei has no organization GitHub access and must never be asked to update the PR directly.
